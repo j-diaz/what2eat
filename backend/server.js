@@ -1,6 +1,6 @@
 'use strict';
 
-var express = require('express'),
+const express = require('express'),
     app = express(),
     port = process.env.PORT || 9000,
     path = require('path'),
@@ -19,7 +19,7 @@ app.set('views', ngAppPath);
 require(__dirname + '/controller/api-routes.js')(app, version);
 
 // Start server
-var server = app.listen(port, function() {
+const server = app.listen(port, function() {
     console.log('Server started on port: ' + port);
 });
 

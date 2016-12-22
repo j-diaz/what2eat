@@ -15,10 +15,10 @@
 // ---------------------------------------------------------
 
 // Add the yelp node.js module
-var Yelp = require('yelp');
+const Yelp = require('yelp');
 
 // Instiate a yelp object from the module
-var yelp = new Yelp({
+const yelp = new Yelp({
  consumer_key: process.env.CONSUMER_KEY,
  consumer_secret: process.env.CONSUMER_SECRET,
  token: process.env.TOKEN,
@@ -29,7 +29,7 @@ module.exports = function(app, version) {
 
   // Prefix string for all the API routes
   // Helpful for versioning our api backend url routes
-  var prefix = '/api/'+version;
+  const prefix = '/api/'+version;
 
   // -------------------------------------------------------
   // Root page serves the index page
