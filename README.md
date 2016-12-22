@@ -3,9 +3,8 @@ What2Eat
 ========
 
 ##How to run?
-
 1. Install *Node.js 4.3.2 LTS*.
-2. Clone this repository
+2. Clone this repository.
 3. Create a filenamed  ```oauth.sh``` with the following contents:
    ```
    #!/bin/bash
@@ -38,7 +37,7 @@ What2Eat
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Strict Mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
 * [ECMAScript 6](http://es6-features.org/#Constants)
-* [AngularJS](https://angularjs.org)
+* [Vue.js](https://vuejs.org)
 * [Node.js](https://nodejs.org/en/)
 * [Express.js](https://github.com/j-diaz/what2eat.git)
 * [Boostrap CSS](http://getbootstrap.com/css/)
