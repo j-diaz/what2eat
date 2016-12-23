@@ -19,7 +19,7 @@ app.set('views', ngAppPath);
 require(__dirname + '/controller/api-routes.js')(app, version);
 
 // Start server
-const server = app.listen(port, function() {
+const server = app.listen(port, () => {
     console.log('Server started on port: ' + port);
 });
 
