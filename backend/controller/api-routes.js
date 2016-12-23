@@ -8,9 +8,9 @@
 //
 // Basically the developer API.
 //
-// AngularJS will handle client side routes or
+// Vue.js will handle client side routes or
 // webpage endpoints. Thus, we only need to serve the index
-// page and angular-router will take care of the rest.
+// page and vue-router will take care of the rest.
 //
 // ---------------------------------------------------------
 
@@ -25,7 +25,7 @@ const yelp = new Yelp({
  token_secret: process.env.TOKEN_SECRET
 });
 
-module.exports = function(app, version) {
+module.exports = (app, version) => {
 
   // Prefix string for all the API routes
   // Helpful for versioning our api backend url routes
@@ -34,27 +34,27 @@ module.exports = function(app, version) {
   // -------------------------------------------------------
   // Root page serves the index page
   // -------------------------------------------------------
-  app.get('/', function(req, res ,next){
+  app.get('/', (req, res ,next) => {
     res.render('index.html');
   });
 
   // -------------------------------------------------------
   // Get all the restaurants available in the system
   // -------------------------------------------------------
-  app.get(prefix + '/restaurant/all', function(req, res) {
+  app.get(prefix + '/restaurant/all', (req, res) => {
 
      // build a longitude and latitude object as the yelp api expects
      var ll = req.query.latitude  + ',' + req.query.longitude;
      console.log('ll: '+ll);
 
      // Make a search in yelp
-     yelp.search({ term: 'food', ll: ll }).then(function(data){
+     yelp.search({ term: 'food', ll: ll }).then((data) => {
 
           console.log('Recieved data from yelp');
           // Send the data to the client
           res.send(data);
 
-        }).catch(function(err) {
+        }).catch((err) => {
           // Print error if found.
           console.error(err);
         });
@@ -63,7 +63,7 @@ module.exports = function(app, version) {
   // -------------------------------------------------------
   // Get all active voting sessions in the system
   // -------------------------------------------------------
-  app.get(prefix + '/voting-sessions/all', function(req, res) {
+  app.get(prefix + '/voting-sessions/all', (req, res) => {
       // Call mongodb and get all mongo documents which "session" property
       // is set to active
 
@@ -76,7 +76,7 @@ module.exports = function(app, version) {
   // -------------------------------------------------------
   // For any other route, not previoously registered send index
   // -------------------------------------------------------
-  app.all('/*', function(req, res, next){
+  app.all('/*', (req, res, next) => {
    res.sendFile('index.html', {root: __dirname + '../../../app'});
   });
 
