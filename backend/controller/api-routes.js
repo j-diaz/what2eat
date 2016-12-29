@@ -25,7 +25,7 @@ const yelp = new Yelp({
  token_secret: process.env.TOKEN_SECRET
 });
 
-module.exports = (app, version, io) => {
+module.exports = (app, version) => {
 
   // Prefix string for all the API routes
   // Helpful for versioning our api backend url routes
@@ -36,6 +36,10 @@ module.exports = (app, version, io) => {
   // -------------------------------------------------------
   app.get('/', (req, res ,next) => {
     res.render('index.html');
+  });
+  
+  app.get('/voting-session/:session', (req, res) => {
+    res.render('voting.html');
   });
 
   // -------------------------------------------------------
@@ -78,7 +82,7 @@ module.exports = (app, version, io) => {
   app.get(prefix + '/voting-sesion/ab/join', (req, res) => {
 
     // join websocket channel according to regex pattern
-    io.join('ab').emit('some event');
+    app.io.join('ab').emit('some event');
     // render page for that particular voting session
     res.send({});
   });

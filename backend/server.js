@@ -4,29 +4,26 @@ const express = require('express'),
     app = express(),
     port = process.env.PORT || 9000,
     path = require('path'),
-    ngAppPath = path.resolve(__dirname, '../app'), //serve our vue app
+    frontend = path.resolve(__dirname, '../app'), //serve our vue app
     version = 'v1',
-    io = require('socket.io')(app);
+    httpServ = require('http').createServer(app);
+
 
 // Configuration
-app.set('port', port);
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-// Serve static angular app
-app.use(express.static(ngAppPath));
-app.set('views', ngAppPath);
+app.use(express.static(frontend));
+app.set('views', frontend);
+app.set('port', port);
 
-// Register websocket namespace
-const nsp = io.of('/voting');
-nsp.on('connection', (socket) => {
-  console.log('someone connected');
-});
+// Setup websockets behviour
+require(__dirname + '/controller/ws.js')(app, httpServ)
 
 // Register all backend url REST endpoints
-require(__dirname + '/controller/api-routes.js')(app, version, nsp);
+require(__dirname + '/controller/api-routes.js')(app, version);
 
 // Start server
-const server = app.listen(port, () => {
+const server = httpServ.listen(port, () => {
     console.log('Server started on port: ' + port);
 });
 

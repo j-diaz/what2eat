@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="what2eatApp">
+<html lang="en" >
 
 <head>
     <meta charset="UTF-8">
@@ -9,9 +9,35 @@
     <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
     <link type="text/css" rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"> -->
-</head>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+    <script>
+      var socket = io('/voting');
 
-<body ng-controller="foodListController">
+      socket.on('vote', function(msg){
+        $('#messages-area').append($('<li>').text(JSON.stringify(msg)));
+      });
+
+      function sendFunction() {
+        console.log('send function triggered');
+        socket.emit('message', $('#new-message').val());
+        $('#new-message').val('');
+       }
+
+       function sendJoin(){
+         var roomId = $('#new-room').val();
+         console.log('Calling send join roomId: '+roomId);
+         socket.emit('join', {roomId: roomId});
+       }
+
+       function vote(){
+         console.log('Calling send vote');
+         var roomId = $('#new-room').val();
+         socket.emit('vote', {roomId: roomId, vote: "chinaOne"});
+       }
+    </script>
+</head>
+<body >
 
     <!-- Header -->
     <nav class="navbar navbar-inverse">
@@ -26,42 +52,21 @@
         <div class="jumbotron">
             <h1>Welcome Fatty!</h1>
         </div>
+        <ul id="messages-area"></ul>
+        <form id="form" onsubmit="return false;">
+          <input id="new-message" type="text" /><button onclick="sendFunction()">Send</button>
+          <input id="new-room" type="text" /><button onclick="sendJoin()">Join</button>
+          <button onclick="vote()">Vote</button>
 
-        <!-- progress bar -->
-        <div>
-            <uib-progressbar class="progress-striped active" value="progress" type="info" ng-hide="done"><i>Fetching food...</i></uib-progressbar>
-        </div>
-
-        <br>
-        <p ng-hide="!done">A total of {{ numberOfResturants }} resturants found.</p>
-        <ul class="list-group">
-
-            <li ng-repeat="restaurant in restaurants | orderBy:'distance' " class="list-group-item">
-                <h3> {{restaurant.name}} <span ng-repeat="n in range(restaurant.rating) track by $index" class="fa fa-star text-warning"></span><span ng-show="isDecimal(restaurant.rating)" class="fa fa-star-half text-warning"></span></h3>
-                <p> You are {{ restaurant.distance/1000 | number:2 }} KM from here.</p>
-            </li>
-
-        </ul>
-
+        </form>
     </div>
-    <!-- / food Section -->
 
     <!-- Footer -->
     <div class="container">
-        <footer>
-        </footer>
+        <a href="/voting-session/GRdf56">New Voting Booth</a>
     </div>
 
     <!-- JS imports  -->
-    <!-- <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-touch/angular-touch.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-
-    <script type="text/javascript" src="js/foodListController.js"></script>
-    <script type="text/javascript" src="js/currSessionController.js"></script> -->
-
 </body>
 
 </html>

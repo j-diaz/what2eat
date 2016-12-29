@@ -47,7 +47,7 @@ create voting sessions to democratically decide which place they want to go eat.
 * [Boostrap CSS](http://getbootstrap.com/css/)
 * [Mocha](http://mochajs.org/) testing framework
 * [MongoDB](https://docs.mongodb.com/)
-* General knowledge of how the web works (HTTP, HTTP2, WebSockets, Single Page Webapps).
+* General knowledge of how the web works (HTTP, WebSockets, Single Page Webapps).
 
 ##System Architecture
 
