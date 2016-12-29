@@ -1,9 +1,9 @@
 node_modules/
 *.~lock*
 *oauth.sh
-
+derby.log
 oauth2_key*
-
+metastore_db
 tokens*
 .vscode
 

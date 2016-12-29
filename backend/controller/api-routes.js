@@ -25,7 +25,7 @@ const yelp = new Yelp({
  token_secret: process.env.TOKEN_SECRET
 });
 
-module.exports = (app, version) => {
+module.exports = (app, version, io) => {
 
   // Prefix string for all the API routes
   // Helpful for versioning our api backend url routes
@@ -61,17 +61,32 @@ module.exports = (app, version) => {
   }); // end of get /api/v1/restaurant/all route
 
   // -------------------------------------------------------
-  // Get all active voting sessions in the system
+  // Generate an unique URL for a new voting session
   // -------------------------------------------------------
-  app.get(prefix + '/voting-sessions/all', (req, res) => {
-      // Call mongodb and get all mongo documents which "session" property
-      // is set to active
+  app.get(prefix + '/new/voting-session', (req, res) => {
 
-      res.send({});
+      // Call DB get new url
+
+      // Example has of url
+      var hash = { uri: '/voting/bGR54ys'};
+      res.send(hash);
   });
 
   // To do: add more API routes here...
+  // Client should have a /voting/*
 
+  app.get(prefix + '/voting-sesion/ab/join', (req, res) => {
+
+    // join websocket channel according to regex pattern
+    io.join('ab').emit('some event');
+    // render page for that particular voting session
+    res.send({});
+  });
+
+  // app.post(prefix + '/voting-session/ab', (req, res) => {
+  //
+  //   res.send({});
+  // });
 
   // -------------------------------------------------------
   // For any other route, not previoously registered send index
