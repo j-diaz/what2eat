@@ -2,7 +2,7 @@
 What2Eat
 ========
 
-##How to run?
+## How to run?
 
 1. Install *Node.js 4.3.2 LTS*.
 2. Clone this repository
@@ -28,12 +28,12 @@ What2Eat
 9. See web app. In your browser, navigate to [http://localhost:9000](http://localhost:9000/)
 10. [**Optional**] Feel like maximizing perfomance? Run ```node backend/cluster.js``` instead of step 8.
 
-##Testing
+## Testing
 
 * Load seed data by running seed/setup.py
 * Run ```mocha -R spec test/route-test.js```
 
-##What should I know?
+## What should I know?
 
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Strict Mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
@@ -46,7 +46,7 @@ What2Eat
 * [MongoDB](https://docs.mongodb.com/)
 * General knowledge of how the web works (HTTP, HTTP2, WebSockets, HTML, CSS, etc.).
 
-##System Architecture
+## System Architecture
 
 Block diagram of system component architecture
 ![Architecture](docs/architecture/What2EatArchitecture/Slide1.png)
